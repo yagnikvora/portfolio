@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane, FaCheckCircle, FaTimes } from 'react-icons/fa';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -12,6 +12,7 @@ const Contact = () => {
     subject: '',
     message: '',
   });
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,8 +25,15 @@ const Contact = () => {
     e.preventDefault();
     // Add your form submission logic here
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
+    
+    // Show custom success modal
+    setShowSuccess(true);
     setFormData({ name: '', email: '', subject: '', message: '' });
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 5000);
   };
 
   const containerVariants = {
@@ -253,6 +261,83 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Custom Success Modal */}
+      <AnimatePresence>
+        {showSuccess && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            onClick={() => setShowSuccess(false)}
+          >
+            {/* Backdrop with blur */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            
+            {/* Success Card */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative glass-strong border-2 border-green-500/30 rounded-3xl p-8 max-w-md w-full shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowSuccess(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              >
+                <FaTimes size={20} />
+              </button>
+
+              {/* Animated success icon */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/50"
+              >
+                <FaCheckCircle className="text-4xl text-white" />
+              </motion.div>
+
+              {/* Success message */}
+              <motion.h3
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-3xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent"
+              >
+                Message Sent!
+              </motion.h3>
+
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="text-gray-300 text-center mb-6 leading-relaxed"
+              >
+                Thank you for reaching out! I'll get back to you as soon as possible.
+              </motion.p>
+
+              {/* Decorative elements */}
+              <div className="absolute top-0 left-0 w-32 h-32 bg-green-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+              {/* Auto-close indicator */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 overflow-hidden rounded-b-3xl">
+                <motion.div
+                  initial={{ width: "100%" }}
+                  animate={{ width: "0%" }}
+                  transition={{ duration: 5, ease: "linear" }}
+                  className="h-full bg-gradient-to-r from-green-400 to-emerald-500"
+                ></motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
