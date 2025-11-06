@@ -74,8 +74,13 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 relative">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-purple-900/5 to-slate-900"></div>
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -86,14 +91,17 @@ const Projects = () => {
             variants={itemVariants}
             className="text-5xl md:text-6xl font-extrabold text-center mb-6"
           >
-            Featured <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Projects</span>
+            Featured <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient bg-300%">Projects</span>
           </motion.h2>
           
           <motion.p variants={itemVariants} className="text-center text-gray-400 text-lg mb-4">
             Some of my recent work
           </motion.p>
           
-          <motion.div variants={itemVariants} className="w-24 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mx-auto mb-16 rounded-full"></motion.div>
+          <motion.div 
+            variants={itemVariants} 
+            className="w-24 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mx-auto mb-16 rounded-full pulse-glow"
+          ></motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
@@ -101,8 +109,11 @@ const Projects = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -15, scale: 1.02 }}
-                className="glass rounded-3xl overflow-hidden group border-2 border-blue-500/20 hover:border-blue-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30"
+                className="glass-strong rounded-3xl overflow-hidden group border-2 border-blue-500/20 hover:border-blue-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 card-hover relative"
               >
+                {/* Animated border glow */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                
                 {/* Project Image */}
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -116,17 +127,17 @@ const Projects = () => {
                   <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <motion.a
                       href={project.github}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
-                      className="px-6 py-3 bg-slate-900/90 backdrop-blur-sm text-white rounded-full font-medium flex items-center gap-2 border border-gray-700 hover:border-blue-400 transition-colors"
+                      className="px-6 py-3 glass-strong text-white rounded-full font-medium flex items-center gap-2 border border-gray-700 hover:border-blue-400 transition-colors glow-hover"
                     >
                       <FaGithub /> Code
                     </motion.a>
                     <motion.a
                       href={project.live}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.1, rotate: -5 }}
                       whileTap={{ scale: 0.9 }}
-                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium flex items-center gap-2 shadow-lg"
+                      className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 text-white rounded-full font-medium flex items-center gap-2 shadow-lg animate-gradient bg-300%"
                     >
                       <FaExternalLinkAlt /> Live
                     </motion.a>
@@ -134,8 +145,8 @@ const Projects = () => {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                <div className="p-6 relative z-10">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                     {project.title}
                   </h3>
                   <p className="text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">
@@ -145,12 +156,13 @@ const Projects = () => {
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, i) => (
-                      <span
+                      <motion.span
                         key={i}
-                        className="px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium border border-blue-500/30 hover:bg-blue-500/20 transition-colors"
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        className="px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium border border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-400/60 transition-all cursor-default"
                       >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
@@ -158,23 +170,30 @@ const Projects = () => {
                   <div className="flex gap-4 pt-4 border-t border-gray-700">
                     <a
                       href={project.github}
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium"
+                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium group/link"
                     >
-                      <FaGithub className="text-lg" /> View Code
+                      <FaGithub className="text-lg group-hover/link:animate-pulse" /> View Code
                     </a>
                     <a
                       href={project.live}
-                      className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm font-medium"
+                      className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm font-medium group/link"
                     >
-                      <FaExternalLinkAlt /> Live Demo
+                      <FaExternalLinkAlt className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" /> Live Demo
                     </a>
                   </div>
                 </div>
 
-                {/* Badge */}
-                <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                {/* Animated Badge */}
+                <motion.div 
+                  className="absolute top-4 right-4 px-4 py-1.5 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 rounded-full text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg animate-gradient bg-300%"
+                  initial={{ rotate: -10 }}
+                  whileHover={{ rotate: 0 }}
+                >
                   Featured
-                </div>
+                </motion.div>
+
+                {/* Corner shine effect */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl"></div>
               </motion.div>
             ))}
           </div>

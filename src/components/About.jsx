@@ -37,10 +37,11 @@ const About = () => {
 
   return (
     <section id="about" className="py-24 bg-gradient-to-b from-slate-900 via-blue-900/10 to-slate-900 relative overflow-hidden">
-      {/* Background decoration */}
+      {/* Enhanced Background decoration */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-blob"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -54,14 +55,17 @@ const About = () => {
             variants={itemVariants}
             className="text-5xl md:text-6xl font-extrabold text-center mb-6"
           >
-            About <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">Me</span>
+            About <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent animate-gradient bg-300%">Me</span>
           </motion.h2>
           
           <motion.p variants={itemVariants} className="text-center text-gray-400 text-lg mb-4">
             Get to know me better
           </motion.p>
           
-          <motion.div variants={itemVariants} className="w-24 h-1.5 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-16 rounded-full"></motion.div>
+          <motion.div 
+            variants={itemVariants} 
+            className="w-24 h-1.5 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 mx-auto mb-16 rounded-full pulse-glow"
+          ></motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
             {/* Left side - Enhanced Image */}
@@ -71,17 +75,17 @@ const About = () => {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl transform rotate-6 blur-sm opacity-30"
+                  className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 rounded-3xl transform rotate-6 blur-sm opacity-30"
                 ></motion.div>
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 rounded-3xl transform -rotate-6 blur-sm opacity-30"
+                  className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-600 to-blue-500 rounded-3xl transform -rotate-6 blur-sm opacity-30"
                 ></motion.div>
                 
-                {/* Main card */}
-                <div className="relative glass p-8 rounded-3xl border-2 border-blue-500/30 shadow-2xl shadow-blue-500/20">
-                  <div className="relative w-full h-96 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-8xl font-black text-white overflow-hidden group">
+                {/* Main card with enhanced glass effect */}
+                <div className="relative glass-strong p-8 rounded-3xl border-2 border-blue-500/30 shadow-2xl shadow-blue-500/20 hover:shadow-purple-500/30 transition-shadow duration-500">
+                  <div className="relative w-full h-96 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-8xl font-black text-white overflow-hidden group animate-gradient bg-300%">
                     {/* Animated background pattern */}
                     <motion.div
                       className="absolute inset-0 opacity-20"
@@ -98,26 +102,33 @@ const About = () => {
                         backgroundSize: '20px 20px',
                       }}
                     />
-                    <span className="relative z-10 drop-shadow-2xl">YV</span>
+                    <motion.span 
+                      className="relative z-10 drop-shadow-2xl"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      YV
+                    </motion.span>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                   </div>
                   
-                  {/* Floating badges */}
+                  {/* Enhanced Floating badges */}
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute -top-6 -right-6 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full shadow-xl"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="absolute -top-6 -right-6 px-6 py-3 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-full shadow-xl cursor-pointer animate-gradient bg-300%"
                   >
-                    <span className="font-bold text-white text-sm">🏆 Award Winner</span>
+                    <span className="font-bold text-white text-sm flex items-center gap-2">🏆 Award Winner</span>
                   </motion.div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Right side - Content */}
+            {/* Right side - Enhanced Content */}
             <motion.div variants={itemVariants} className="space-y-6">
               <h3 className="text-4xl font-bold text-white mb-6">
-                Full Stack <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Developer</span>
+                Full Stack <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-300%">Developer</span>
               </h3>
               <p className="text-gray-300 leading-relaxed text-lg">
                 I'm a passionate <span className="text-blue-400 font-semibold">Full Stack Developer</span> with expertise in building modern, scalable web applications. 
@@ -134,22 +145,27 @@ const About = () => {
                 Annual Growth Meet 2025, which motivates me to continue pushing boundaries and delivering excellence.
               </p>
 
-              {/* Stats */}
+              {/* Enhanced Stats with glow effects */}
               <div className="grid grid-cols-3 gap-4 pt-6">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="glass p-4 rounded-2xl text-center border-2 border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
+                    whileHover={{ scale: 1.08, y: -8 }}
+                    className="glass-strong p-4 rounded-2xl text-center border-2 border-blue-500/20 hover:border-blue-500/50 transition-all duration-300 glow-hover cursor-pointer"
                   >
-                    <stat.icon className="text-blue-400 text-3xl mx-auto mb-2" />
+                    <motion.div
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                    >
+                      <stat.icon className="text-blue-400 text-3xl mx-auto mb-2" />
+                    </motion.div>
                     <h4 className="font-bold text-2xl text-white mb-1">{stat.number}</h4>
                     <p className="text-gray-400 text-xs">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Skills highlight */}
+              {/* Enhanced Skills highlight with hover effects */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6">
                 {[
                   { icon: FaCode, text: 'Clean Code', color: 'text-blue-400' },
@@ -161,10 +177,15 @@ const About = () => {
                 ].map((skill, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="glass p-4 rounded-xl text-center transform transition-all duration-300 border border-gray-700 hover:border-blue-500/50"
+                    whileHover={{ scale: 1.15, rotate: 5, y: -5 }}
+                    className="glass p-4 rounded-xl text-center transform transition-all duration-300 border border-gray-700 hover:border-blue-500/50 glow-hover cursor-pointer"
                   >
-                    <skill.icon className={`${skill.color} text-3xl mx-auto mb-2`} />
+                    <motion.div
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                    >
+                      <skill.icon className={`${skill.color} text-3xl mx-auto mb-2 drop-shadow-lg`} />
+                    </motion.div>
                     <p className="text-gray-300 text-sm font-medium">{skill.text}</p>
                   </motion.div>
                 ))}

@@ -65,8 +65,13 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 relative">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-blue-900/5 to-slate-900"></div>
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/3 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -77,14 +82,17 @@ const Skills = () => {
             variants={itemVariants}
             className="text-5xl md:text-6xl font-extrabold text-center mb-6"
           >
-            My <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Skills</span>
+            My <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient bg-300%">Skills</span>
           </motion.h2>
           
           <motion.p variants={itemVariants} className="text-center text-gray-400 text-lg mb-4">
             Technologies I work with
           </motion.p>
           
-          <motion.div variants={itemVariants} className="w-24 h-1.5 bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 mx-auto mb-16 rounded-full"></motion.div>
+          <motion.div 
+            variants={itemVariants} 
+            className="w-24 h-1.5 bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 mx-auto mb-16 rounded-full pulse-glow"
+          ></motion.div>
 
           <div className="grid md:grid-cols-3 gap-10">
             {skillCategories.map((category, categoryIndex) => (
@@ -92,13 +100,16 @@ const Skills = () => {
                 key={categoryIndex}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="glass p-8 rounded-3xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 border-2 border-purple-500/20 hover:border-purple-500/50 relative overflow-hidden group"
+                className="glass-strong p-8 rounded-3xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 border-2 border-purple-500/20 hover:border-purple-500/50 relative overflow-hidden group card-hover"
               >
                 {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Decorative corner */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
                 
                 <h3 className="text-3xl font-bold text-white mb-8 text-center relative z-10">
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-300%">
                     {category.title}
                   </span>
                 </h3>
@@ -108,15 +119,20 @@ const Skills = () => {
                       key={skillIndex}
                       whileHover={{ scale: 1.15, rotate: [0, -5, 5, 0] }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex flex-col items-center p-5 bg-slate-800/50 backdrop-blur-sm rounded-2xl cursor-pointer border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30"
+                      className="flex flex-col items-center p-5 bg-slate-800/50 backdrop-blur-sm rounded-2xl cursor-pointer border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 group/skill"
                     >
                       <motion.div
                         animate={{ y: [0, -5, 0] }}
                         transition={{ duration: 2, repeat: Infinity, delay: skillIndex * 0.2 }}
+                        className="relative"
                       >
-                        <skill.icon className={`text-5xl ${skill.color} mb-3 drop-shadow-lg`} />
+                        <skill.icon className={`text-5xl ${skill.color} mb-3 drop-shadow-lg group-hover/skill:drop-shadow-2xl transition-all`} />
+                        {/* Glow effect on hover */}
+                        <div className={`absolute inset-0 blur-xl opacity-0 group-hover/skill:opacity-50 transition-opacity ${skill.color}`}>
+                          <skill.icon className="text-5xl" />
+                        </div>
                       </motion.div>
-                      <span className="text-sm text-gray-300 text-center font-medium">{skill.name}</span>
+                      <span className="text-sm text-gray-300 text-center font-medium group-hover/skill:text-white transition-colors">{skill.name}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -124,15 +140,25 @@ const Skills = () => {
             ))}
           </div>
 
-          <motion.div variants={itemVariants} className="mt-16 text-center glass p-8 rounded-3xl border-2 border-blue-500/30 max-w-3xl mx-auto">
-            <p className="text-gray-300 text-lg mb-4">
-              💡 <span className="font-semibold text-blue-400">Always learning</span> and exploring new technologies to stay ahead in the ever-evolving tech landscape.
+          <motion.div 
+            variants={itemVariants} 
+            className="mt-16 text-center glass-strong p-8 rounded-3xl border-2 border-blue-500/30 hover:border-blue-500/50 max-w-3xl mx-auto relative overflow-hidden group transition-all duration-500"
+          >
+            {/* Animated background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <p className="text-gray-300 text-lg mb-4 relative z-10">
+              💡 <span className="font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Always learning</span> and exploring new technologies to stay ahead in the ever-evolving tech landscape.
             </p>
-            <div className="flex flex-wrap justify-center gap-3 mt-6">
+            <div className="flex flex-wrap justify-center gap-3 mt-6 relative z-10">
               {['TypeScript', 'GraphQL', 'AWS', 'CI/CD', 'Testing'].map((tech, i) => (
-                <span key={i} className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium">
+                <motion.span 
+                  key={i} 
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 hover:border-blue-400/60 rounded-full text-blue-400 text-sm font-medium cursor-default transition-all"
+                >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </div>
           </motion.div>
