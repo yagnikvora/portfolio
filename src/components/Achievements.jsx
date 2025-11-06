@@ -67,13 +67,7 @@ const Achievements = () => {
   };
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-b from-slate-900 via-purple-900/10 to-slate-900 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-yellow-500 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
-      </div>
-
+    <section id="achievements" className="py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -85,49 +79,102 @@ const Achievements = () => {
             variants={itemVariants}
             className="text-5xl md:text-6xl font-extrabold text-center mb-6"
           >
-            Achievements & <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">Awards</span>
+            Achievements & <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient bg-300%">Awards</span>
           </motion.h2>
           
           <motion.p variants={itemVariants} className="text-center text-gray-400 text-lg mb-4">
             Recognition for excellence and dedication
           </motion.p>
           
-          <motion.div variants={itemVariants} className="w-24 h-1.5 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 mx-auto mb-16 rounded-full"></motion.div>
+          <motion.div 
+            variants={itemVariants} 
+            className="w-24 h-1.5 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 mx-auto mb-16 rounded-full pulse-glow"
+          ></motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {achievements.map((achievement, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -10 }}
-                className={`glass p-8 rounded-3xl hover:shadow-2xl ${achievement.glowColor} transition-all duration-500 border-2 ${achievement.borderColor} relative overflow-hidden group`}
+                whileHover={{ scale: 1.08, y: -15, rotateY: 5 }}
+                className={`glass-strong p-8 rounded-3xl hover:shadow-2xl ${achievement.glowColor} transition-all duration-500 border-2 ${achievement.borderColor} hover:border-opacity-100 relative overflow-hidden group perspective-card`}
               >
-                {/* Animated background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${achievement.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                {/* Enhanced Animated background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${achievement.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-gradient bg-300%`}></div>
                 
-                {/* Icon with animation */}
+                {/* Animated sparkles */}
+                <div className="absolute inset-0 overflow-hidden">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-white rounded-full"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                      }}
+                      animate={{
+                        scale: [0, 1, 0],
+                        opacity: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: i * 0.4,
+                      }}
+                    />
+                  ))}
+                </div>
+                
+                {/* Enhanced Icon with multi-layer animation */}
                 <motion.div 
-                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${achievement.color} flex items-center justify-center mb-6 mx-auto relative z-10 shadow-lg`}
-                  whileHover={{ rotate: 360 }}
+                  className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${achievement.color} flex items-center justify-center mb-6 mx-auto relative z-10 shadow-2xl animate-gradient bg-300%`}
+                  whileHover={{ rotate: 360, scale: 1.2 }}
                   transition={{ duration: 0.6 }}
+                  animate={{
+                    boxShadow: [
+                      '0 0 20px rgba(234, 179, 8, 0.3)',
+                      '0 0 40px rgba(234, 179, 8, 0.6)',
+                      '0 0 20px rgba(234, 179, 8, 0.3)',
+                    ],
+                  }}
                 >
-                  <achievement.icon className="text-4xl text-white drop-shadow-lg" />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <achievement.icon className="text-5xl text-white drop-shadow-2xl" />
+                  </motion.div>
+                  {/* Rotating ring */}
+                  <motion.div
+                    className="absolute inset-0 border-4 border-white/30 rounded-2xl"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  />
                 </motion.div>
 
-                {/* Content */}
-                <h3 className="text-2xl font-bold text-white text-center mb-3 relative z-10">
+                {/* Enhanced Content */}
+                <h3 className="text-2xl font-bold text-white text-center mb-3 relative z-10 group-hover:scale-105 transition-transform">
                   {achievement.title}
                 </h3>
                 <div className="text-center mb-4 relative z-10">
-                  <p className={`bg-gradient-to-r ${achievement.color} bg-clip-text text-transparent font-bold text-lg`}>
+                  <p className={`bg-gradient-to-r ${achievement.color} bg-clip-text text-transparent font-bold text-lg animate-gradient bg-300%`}>
                     {achievement.organization}
                   </p>
-                  <p className="text-gray-400 text-sm mt-1">{achievement.event}</p>
-                  <p className="text-gray-500 text-sm font-semibold mt-1">{achievement.date}</p>
+                  <p className="text-gray-400 text-sm mt-1 font-medium">{achievement.event}</p>
+                  <motion.p 
+                    className="text-gray-500 text-sm font-semibold mt-1"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    📅 {achievement.date}
+                  </motion.p>
                 </div>
-                <p className="text-gray-300 text-sm text-center leading-relaxed relative z-10">
+                <p className="text-gray-300 text-sm text-center leading-relaxed relative z-10 group-hover:text-white transition-colors">
                   {achievement.description}
                 </p>
+                
+                {/* Corner accent */}
+                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${achievement.color} opacity-20 rounded-bl-full blur-xl group-hover:opacity-40 transition-opacity`}></div>
               </motion.div>
             ))}
           </div>
@@ -137,11 +184,17 @@ const Achievements = () => {
             variants={itemVariants}
             className="mt-16"
           >
-            <div className="glass p-10 rounded-3xl border-2 border-yellow-500/30 shadow-2xl shadow-yellow-500/20">
-              <div className="text-center mb-10">
+            <div className="glass-strong p-10 rounded-3xl border-2 border-yellow-500/30 hover:border-yellow-500/60 shadow-2xl shadow-yellow-500/20 hover:shadow-yellow-500/40 transition-all duration-500 relative overflow-hidden group">
+              {/* Animated background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="text-center mb-10 relative z-10">
                 <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                  animate={{ 
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
                   className="inline-block"
                 >
                   <FaTrophy className="text-7xl text-yellow-400 mb-4 drop-shadow-2xl" />

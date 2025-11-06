@@ -215,3 +215,251 @@ body {
 .smooth-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Neon glow effects */
+.neon-blue {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
+               0 0 20px rgba(59, 130, 246, 0.6),
+               0 0 30px rgba(59, 130, 246, 0.4),
+               0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+.neon-purple {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.8),
+               0 0 20px rgba(139, 92, 246, 0.6),
+               0 0 30px rgba(139, 92, 246, 0.4),
+               0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.neon-pink {
+  text-shadow: 0 0 10px rgba(236, 72, 153, 0.8),
+               0 0 20px rgba(236, 72, 153, 0.6),
+               0 0 30px rgba(236, 72, 153, 0.4),
+               0 0 40px rgba(236, 72, 153, 0.2);
+}
+
+/* Advanced glow button */
+.glow-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.glow-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Holographic effect */
+.holographic {
+  background: linear-gradient(
+    45deg,
+    #ff0080,
+    #ff8c00,
+    #40e0d0,
+    #9370db,
+    #00ff00
+  );
+  background-size: 400% 400%;
+  animation: holographic 8s ease infinite;
+}
+
+@keyframes holographic {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* 3D card effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.05);
+}
+
+/* Magnetic effect */
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Text reveal animation */
+@keyframes textReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.text-reveal {
+  animation: textReveal 1s ease-out forwards;
+}
+
+/* Liquid button effect */
+.liquid-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.liquid-button:hover::after {
+  width: 400px;
+  height: 400px;
+}
+
+/* Spotlight effect */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Aurora background */
+@keyframes aurora {
+  0%, 100% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-50%) rotate(180deg);
+  }
+}
+
+.aurora {
+  animation: aurora 20s ease-in-out infinite;
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.glitch:hover {
+  animation: glitch 0.3s ease-in-out;
+}
+
+/* Rainbow border animation */
+@keyframes rainbow-border {
+  0% {
+    border-color: #ff0080;
+  }
+  16.67% {
+    border-color: #ff8c00;
+  }
+  33.33% {
+    border-color: #40e0d0;
+  }
+  50% {
+    border-color: #9370db;
+  }
+  66.67% {
+    border-color: #00ff00;
+  }
+  83.33% {
+    border-color: #0080ff;
+  }
+  100% {
+    border-color: #ff0080;
+  }
+}
+
+.rainbow-border {
+  animation: rainbow-border 3s linear infinite;
+}
+
+/* Perspective card */
+.perspective-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.perspective-card:hover {
+  transform: rotateY(10deg) rotateX(10deg);
+}
+
+/* Neon box shadow */
+.neon-box {
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5),
+              0 0 10px rgba(59, 130, 246, 0.4),
+              0 0 20px rgba(59, 130, 246, 0.3),
+              0 0 40px rgba(59, 130, 246, 0.2),
+              0 0 80px rgba(59, 130, 246, 0.1);
+}
+
+/* Morphing animation */
+@keyframes morph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+.morph {
+  animation: morph 8s ease-in-out infinite;
+}

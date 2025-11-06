@@ -75,11 +75,6 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 relative">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-purple-900/5 to-slate-900"></div>
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
